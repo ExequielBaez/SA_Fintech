@@ -105,6 +105,15 @@ public class LoanController {
         // Cargo el reporte desde el archivo .jasper
         InputStream jasperStream = this.getClass().getResourceAsStream("/reportes/simulador.jasper");
 
+        //esto lo agrego para que me de los logs por si hay errores
+        System.setProperty("net.sf.jasperreports.debug", "true");
+        System.setProperty("java.awt.headless", "true");
+
+        //esto es para saber si encuentra el archivo
+        if (jasperStream == null) {
+            throw new RuntimeException("Archivo '.jasper' no encontrado en el classpath.");
+        }
+
         // Creo el datasource a partir de la lista
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listaCuotas);
 
