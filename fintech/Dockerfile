@@ -1,5 +1,5 @@
-#FROM openjdk:17-jdk-slim
-FROM amazoncorretto:17-alpine
+FROM openjdk:17-jdk-slim
+#FROM amazoncorretto:17-alpine
 
 # Instalar librerías necesarias para solucionar error jasper report
 RUN apt-get update && \
