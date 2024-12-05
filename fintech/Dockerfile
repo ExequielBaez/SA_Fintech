@@ -2,10 +2,14 @@ FROM openjdk:17-jdk-slim
 #FROM amazoncorretto:17-alpine
 
 # Instalar librerías necesarias para solucionar error jasper report
-
+# a la vez instalo un paquete de fuentes mscorefonts
+# ya que jasperreport con fuentes raras da error y tendria que instalar el .ttf especifico
 RUN apt-get update && \
-    apt-get install -y libfreetype6 libfontconfig1 && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y libfreetype6 libfontconfig1 ttf-mscorefonts-installer && \
+    wget http://ftp.us.debian.org/debian/pool/main/m/msttcorefonts/msttcorefonts_2.5-1_all.deb && \
+        dpkg -i msttcorefonts_2.5-1_all.deb && \
+        rm msttcorefonts_2.5-1_all.deb && \
+        rm -rf /var/lib/apt/lists/*
 
 
 
