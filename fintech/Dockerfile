@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 # a la vez instalo un paquete de fuentes mscorefonts
 # ya que jasperreport con fuentes raras da error y tendria que instalar el .ttf especifico
 RUN apt-get update && \
-    apt-get install -y libfreetype6 libfontconfig1 ttf-mscorefonts-installer && \
+    apt-get install -y libfreetype6 libfontconfig1 && \
     rm -rf /var/lib/apt/lists/*
 
 
