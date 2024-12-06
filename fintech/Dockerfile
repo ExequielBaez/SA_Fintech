@@ -1,5 +1,4 @@
-FROM debian:buster-slim
-#FROM openjdk:17-jdk-slim
+FROM openjdk:17-jdk-slim
 #FROM amazoncorretto:17-alpine
 
 # Instalar librerías necesarias para solucionar error jasper report
@@ -7,10 +6,7 @@ FROM debian:buster-slim
 # ya que jasperreport con fuentes raras da error y tendria que instalar el .ttf especifico
 RUN apt-get update && \
     apt-get install -y libfreetype6 libfontconfig1 ttf-mscorefonts-installer && \
-    wget http://ftp.us.debian.org/debian/pool/main/m/msttcorefonts/msttcorefonts_3.8-1_all.deb && \
-        apt-get install -y --fixbroken ./msttcorefonts_3.8_all.deb && \
-        rm msttcorefonts_3.8_all.deb && \
-        rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 
 
