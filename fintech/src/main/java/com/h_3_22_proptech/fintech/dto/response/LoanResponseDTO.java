@@ -9,6 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class LoanResponseDTO {
 
+    private String name;
+
     private int nroFee;
 
     private double capital;

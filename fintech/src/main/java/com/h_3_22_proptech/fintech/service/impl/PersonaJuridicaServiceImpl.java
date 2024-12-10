@@ -2,17 +2,19 @@ package com.h_3_22_proptech.fintech.service.impl;
 
 import com.h_3_22_proptech.fintech.dto.request.PersonaJuridicaRequestDTO;
 import com.h_3_22_proptech.fintech.dto.request.UpdatePersonaJuridicaRequestDTO;
+import com.h_3_22_proptech.fintech.dto.response.PersonaFisicaResponseDTO;
+import com.h_3_22_proptech.fintech.dto.response.PersonaJuridicaResponseDTO;
 import com.h_3_22_proptech.fintech.persistance.entity.PersonaFisicaEntity;
 import com.h_3_22_proptech.fintech.persistance.entity.PersonaJuridicaEntity;
 import com.h_3_22_proptech.fintech.persistance.entity.UserEntity;
-import com.h_3_22_proptech.fintech.persistance.mapper.IPersonaFisicaMapper;
 import com.h_3_22_proptech.fintech.persistance.mapper.IPersonaJuridicaMapper;
-import com.h_3_22_proptech.fintech.persistance.repository.IPersonaFisicaRepository;
 import com.h_3_22_proptech.fintech.persistance.repository.IPersonaJuridicaRepository;
 import com.h_3_22_proptech.fintech.persistance.repository.IUserRepository;
 import com.h_3_22_proptech.fintech.service.IPersonaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PersonaJuridicaServiceImpl implements IPersonaJuridicaService {
@@ -59,5 +61,15 @@ public class PersonaJuridicaServiceImpl implements IPersonaJuridicaService {
 
 
         return personaJuridicaRepository.save(personaJuridicaEntity);
+    }
+
+    @Override
+    public List<PersonaJuridicaResponseDTO> getAllPj() {
+
+        List<PersonaJuridicaEntity>  listPj = personaJuridicaRepository.findAll();
+
+        List<PersonaJuridicaResponseDTO> listPfDTO = personaJuridicaMapper.toPJResponseDtoList(listPj);
+
+        return listPfDTO;
     }
 }

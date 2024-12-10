@@ -47,6 +47,9 @@ public class PersonaFisicaEntity {
     @OneToMany(mappedBy = "personaFisicaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LoanEntity> loanEntityList;
 
+    @OneToMany(mappedBy = "personaFisicaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvestmentEntity> investmentEntityList;
+
     @CreationTimestamp
     private LocalDateTime dateCreated;
 

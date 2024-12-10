@@ -1,11 +1,12 @@
 package com.h_3_22_proptech.fintech.controller;
 
 import com.h_3_22_proptech.fintech.dto.request.LoanRequestDTO;
+import com.h_3_22_proptech.fintech.dto.response.InvsPersonaResponseDTO;
 import com.h_3_22_proptech.fintech.dto.response.LoanResponseDTO;
 import com.h_3_22_proptech.fintech.dto.response.LoanSimulationResponseDTO;
-import com.h_3_22_proptech.fintech.persistance.entity.LoanEntity;
-import com.h_3_22_proptech.fintech.persistance.entity.UserEntity;
+import com.h_3_22_proptech.fintech.dto.response.LoansPersonaResponseDTO;
 import com.h_3_22_proptech.fintech.service.ILoanService;
+import io.swagger.v3.oas.annotations.Operation;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -30,6 +31,39 @@ public class LoanController {
     @Autowired
     private ILoanService loanService;
 
+
+    @Operation(description = "Listar Todos los Prestamos")
+    @GetMapping
+    public ResponseEntity<?> getAll(){
+
+        List<LoansPersonaResponseDTO> list = loanService.getAllLoansPersona();
+
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+
+    @Operation(description = "Obtener un prestamo por su ID")
+    @GetMapping("/{idLoan}")
+    public ResponseEntity<?> getLoanById(@PathVariable String idLoan){
+
+        LoanResponseDTO loan = loanService.getLoanById(idLoan);
+
+        return ResponseEntity.status(HttpStatus.OK).body(loan);
+    }
+
+
+
+
+    @Operation(description = "Listar Prestamos de una Persona")
+    @GetMapping("/listLoans/{idPersona}")
+    public ResponseEntity<?> getLoans(@PathVariable String idPersona){
+
+        List<LoanResponseDTO> listLoans = loanService.listLoansByPersona(idPersona);
+
+        return ResponseEntity.status(HttpStatus.OK).body(listLoans);
+    }
+
+
+    @Operation(description = "Crear un Prestamo")
     @PostMapping
     public ResponseEntity<?> createLoan(@RequestBody LoanRequestDTO loanRequestDTO){
 
@@ -40,6 +74,7 @@ public class LoanController {
     }
 
 
+    @Operation(description = "Simular un Prestamo - No persiste")
     @GetMapping("/simulation")
     public ResponseEntity<?> createSimulation(@RequestParam ("capital") Double capital,
                                               @RequestParam ("nPayments") Integer nPayments,
@@ -66,6 +101,7 @@ public class LoanController {
         return ResponseEntity.status(HttpStatus.OK).body(listaCuotas);
     }
 
+    @Operation(description = "Generar Reporte de la Simulación en .pdf")
     @GetMapping("/reporte")
     public ResponseEntity<byte[]> generarReporte(
             @RequestParam("capital") Double capital,

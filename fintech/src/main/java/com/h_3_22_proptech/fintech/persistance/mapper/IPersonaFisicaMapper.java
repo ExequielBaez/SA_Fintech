@@ -1,12 +1,17 @@
 package com.h_3_22_proptech.fintech.persistance.mapper;
 
 import com.h_3_22_proptech.fintech.dto.request.PersonaFisicaRequestDTO;
+import com.h_3_22_proptech.fintech.dto.response.LoanResponseDTO;
+import com.h_3_22_proptech.fintech.dto.response.PersonaFisicaResponseDTO;
+import com.h_3_22_proptech.fintech.persistance.entity.LoanEntity;
 import com.h_3_22_proptech.fintech.persistance.entity.PersonaFisicaEntity;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface IPersonaFisicaMapper {
@@ -22,6 +27,10 @@ public interface IPersonaFisicaMapper {
      @Mapping(target = "dateCreated", ignore = true)
      @Mapping(target = "address", ignore = true)
      PersonaFisicaEntity toPersonaFisicaEntity(PersonaFisicaRequestDTO pfDTO);
+
+     List<PersonaFisicaResponseDTO> toPFResponseDtoList(List<PersonaFisicaEntity> personaFisicaEntityList);
+
+
 }
 
 //si alguna vez hay problema cuando se genera el builder

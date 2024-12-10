@@ -4,6 +4,7 @@ import com.h_3_22_proptech.fintech.persistance.entity.FileEntity;
 import com.h_3_22_proptech.fintech.persistance.entity.UserEntity;
 import com.h_3_22_proptech.fintech.service.IFileUploadService;
 import com.h_3_22_proptech.fintech.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class UserController {
     @Autowired
     private IFileUploadService fileService;
 
+    @Operation(description = "Buscar un Usuario")
     @GetMapping("{idUser}")
     public ResponseEntity<?> getUserById(@PathVariable String idUser){
 
@@ -30,7 +32,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userEntity);
 
     }
-
+    @Operation(description = "Crear un Usuario")
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity){
 
@@ -40,6 +42,7 @@ public class UserController {
 
     }
 
+    @Operation(description = "Subir archivo de un Usuario")
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("idUser") String idUser) {
         try {
@@ -50,6 +53,7 @@ public class UserController {
         }
     }
 
+    @Operation(description = "Listar los Archivos de un Usuario")
     @GetMapping("/listFiles/{idUser}")
     public ResponseEntity<List<FileEntity>> getFilesByUser(@PathVariable String idUser) {
 
