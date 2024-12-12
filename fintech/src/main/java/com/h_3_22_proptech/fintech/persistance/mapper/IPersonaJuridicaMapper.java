@@ -23,6 +23,8 @@ public interface IPersonaJuridicaMapper {
     @Mapping(target = "address", ignore = true)
     PersonaJuridicaEntity toPersonaJuridicaEntity(PersonaJuridicaRequestDTO pjDTO);
 
+    PersonaJuridicaResponseDTO toPersonaJuridicaResponseDTO(PersonaJuridicaEntity personaJuridicaEntity);
+
     List<PersonaJuridicaResponseDTO> toPJResponseDtoList(List<PersonaJuridicaEntity> personaJuridicaEntityList);
 
 }

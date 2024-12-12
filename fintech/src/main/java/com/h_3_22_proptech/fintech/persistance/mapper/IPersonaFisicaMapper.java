@@ -28,6 +28,8 @@ public interface IPersonaFisicaMapper {
      @Mapping(target = "address", ignore = true)
      PersonaFisicaEntity toPersonaFisicaEntity(PersonaFisicaRequestDTO pfDTO);
 
+     PersonaFisicaResponseDTO toPersonaFisicaResponseDTO(PersonaFisicaEntity personaFisicaEntity);
+
      List<PersonaFisicaResponseDTO> toPFResponseDtoList(List<PersonaFisicaEntity> personaFisicaEntityList);
 
 

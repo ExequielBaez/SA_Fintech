@@ -35,9 +35,9 @@ public class PersonaFisicaController {
     @GetMapping("{idPersonaFisica}")
     public ResponseEntity<?> getPersonaFisicaById(@PathVariable String idPersonaFisica){
 
-        PersonaFisicaEntity personaFisicaEntity = personaFisicaService.getPersonaFisicaById(idPersonaFisica);
+        PersonaFisicaResponseDTO personaFisicaResponseDTO = personaFisicaService.getPersonaFisicaById(idPersonaFisica);
 
-        return ResponseEntity.status(HttpStatus.OK).body(personaFisicaEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(personaFisicaResponseDTO);
 
     }
 

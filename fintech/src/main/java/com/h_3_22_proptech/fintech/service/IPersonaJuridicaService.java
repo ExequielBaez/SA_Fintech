@@ -14,7 +14,7 @@ public interface IPersonaJuridicaService {
 
     PersonaJuridicaEntity createPersonaJuridica(PersonaJuridicaRequestDTO personaJuridicaRequestDTO);
 
-    PersonaJuridicaEntity getPersonaJuridicaById(String idPersonaJuridica);
+    PersonaJuridicaResponseDTO getPersonaJuridicaById(String idPersonaJuridica);
 
     PersonaJuridicaEntity updatePersonaJuridica(UpdatePersonaJuridicaRequestDTO ujPf);
 

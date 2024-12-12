@@ -27,11 +27,13 @@ public class PersonaFisicaServiceImpl implements IPersonaFisicaService {
     private IPersonaFisicaMapper personaFisicaMapper;
 
     @Override
-    public PersonaFisicaEntity getPersonaFisicaById(String idPersonaFisica) {
+    public PersonaFisicaResponseDTO getPersonaFisicaById(String idPersonaFisica) {
 
         PersonaFisicaEntity personaFisica = personaFisicaRepository.findById(idPersonaFisica).orElseThrow();
 
-        return personaFisica;
+        PersonaFisicaResponseDTO personaFisicaResponseDTO = personaFisicaMapper.toPersonaFisicaResponseDTO(personaFisica);
+
+        return personaFisicaResponseDTO;
     }
 
 

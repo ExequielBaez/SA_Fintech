@@ -41,11 +41,13 @@ public class PersonaJuridicaServiceImpl implements IPersonaJuridicaService {
     }
 
     @Override
-    public PersonaJuridicaEntity getPersonaJuridicaById(String idPersonaJuridica) {
+    public PersonaJuridicaResponseDTO getPersonaJuridicaById(String idPersonaJuridica) {
 
         PersonaJuridicaEntity personaJuridica = personaJuridicaRepository.findById(idPersonaJuridica).orElseThrow();
 
-        return personaJuridica;
+        PersonaJuridicaResponseDTO personaJuridicaResponseDTO = personaJuridicaMapper.toPersonaJuridicaResponseDTO(personaJuridica);
+
+        return personaJuridicaResponseDTO;
 
     }
 

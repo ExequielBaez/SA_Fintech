@@ -12,7 +12,7 @@ public interface IPersonaFisicaService {
 
     PersonaFisicaEntity createPersonaFisica(PersonaFisicaRequestDTO personaFisicaRequestDTO);
 
-    PersonaFisicaEntity getPersonaFisicaById(String idPersonaFisica);
+    PersonaFisicaResponseDTO getPersonaFisicaById(String idPersonaFisica);
 
     PersonaFisicaEntity updatePersonaFisica(UpdatePersonaFisicaRequestDTO upPf);
 
