@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class FileUploadServiceImpl implements IFileUploadService {
@@ -25,18 +26,49 @@ public class FileUploadServiceImpl implements IFileUploadService {
     @Autowired
     private IFileRepository fileRepository;
 
-    private final Path rootLocation = Paths.get("uploads");
+    //private final Path rootLocation = Paths.get("uploads");
+
+    //private final String rootLocation = "SA_fintech/fintech/uploads"; // Ruta específica
 
     @Override
     public String saveFile(MultipartFile file, String idUser) {
         try {
             // Verifica si el usuario existe
-            UserEntity user = userRepository.findById(idUser).orElseThrow(() -> new RuntimeException("User not found"));
+            //UserEntity user = userRepository.findById(idUser).orElseThrow(() -> new RuntimeException("User not found"));
 
             // Guardar el archivo en el sistema de archivos
-            String filename = idUser + "_" + file.getOriginalFilename();
-            Path destinationFile = this.rootLocation.resolve(Paths.get(filename)).normalize().toAbsolutePath();
+            //String filename = idUser + "_" + file.getOriginalFilename();
+            //Path destinationFile = this.rootLocation.resolve(Paths.get(filename)).normalize().toAbsolutePath();
+
+
+            //Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
+
+// Verifica si el usuario existe
+            UserEntity user = userRepository.findById(idUser)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Definir la ruta fija
+            String rootPath = "SA_fintech/fintech/uploads";
+
+            // Crear el directorio si no existe
+            Path rootLocation = Paths.get(rootPath).normalize().toAbsolutePath();
+            if (!Files.exists(rootLocation)) {
+                Files.createDirectories(rootLocation);
+            }
+
+            // Generar nombre único para el archivo
+            Random random = new Random();
+            String filename = idUser + "_" + String.format("%04d", random.nextInt(10000))
+                    + "_" + file.getOriginalFilename();
+
+            // Definir la ubicación completa del archivo
+            Path destinationFile = rootLocation.resolve(filename).normalize();
+
+            // Guardar el archivo en el sistema de archivos
             Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
+
+
+
 
             // Crear y guardar la entidad File
             FileEntity fileEntity = new FileEntity();

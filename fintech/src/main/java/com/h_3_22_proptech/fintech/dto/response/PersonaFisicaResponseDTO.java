@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PersonaFisicaResponseDTO {
 
+    private String idPF;
+
     private String name;
 
     private String lastName;

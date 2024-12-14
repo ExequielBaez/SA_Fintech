@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InvestmentResponseDTO {
 
+    private String idInvestment;
+
     private String name;
 
     private double deposit;

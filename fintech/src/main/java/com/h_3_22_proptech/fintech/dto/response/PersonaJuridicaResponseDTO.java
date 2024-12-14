@@ -9,6 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class PersonaJuridicaResponseDTO {
 
+    private String idPJ;
+
     private String name;
 
     private String cuit;
