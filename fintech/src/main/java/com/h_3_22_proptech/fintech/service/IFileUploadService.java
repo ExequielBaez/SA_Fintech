@@ -1,5 +1,6 @@
 package com.h_3_22_proptech.fintech.service;
 
+import com.h_3_22_proptech.fintech.dto.response.FileResponseDTO;
 import com.h_3_22_proptech.fintech.persistance.entity.FileEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,5 +13,5 @@ public interface IFileUploadService {
 
     public String saveFile(MultipartFile file, String idUser);
 
-    public List<FileEntity> getFilesByUser(String idUser);
+    public List<FileResponseDTO> getFilesByUser(String idUser);
 }

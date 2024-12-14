@@ -1,7 +1,9 @@
 package com.h_3_22_proptech.fintech.service.impl;
 
+import com.h_3_22_proptech.fintech.dto.response.FileResponseDTO;
 import com.h_3_22_proptech.fintech.persistance.entity.FileEntity;
 import com.h_3_22_proptech.fintech.persistance.entity.UserEntity;
+import com.h_3_22_proptech.fintech.persistance.mapper.IFileMapper;
 import com.h_3_22_proptech.fintech.persistance.repository.IFileRepository;
 import com.h_3_22_proptech.fintech.persistance.repository.IUserRepository;
 import com.h_3_22_proptech.fintech.service.IFileUploadService;
@@ -16,10 +18,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class FileUploadServiceImpl implements IFileUploadService {
 
+    @Autowired
+    private IFileMapper fileMapper;
     @Autowired
     private IUserRepository userRepository;
 
@@ -86,10 +91,14 @@ public class FileUploadServiceImpl implements IFileUploadService {
         }
     }
 
-    public List<FileEntity> getFilesByUser(String idUser) {
+    public List<FileResponseDTO> getFilesByUser(String idUser) {
         UserEntity user = userRepository.findById(idUser)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        return user.getFilesList();
+
+
+        return user.getFilesList().stream()
+                .map(fileMapper::toFileResponseDTO) // Aplicar el mapper en cada entidad
+                .collect(Collectors.toList());
     }
 }
 
