@@ -35,6 +35,8 @@ public class LoanEntity {
 
     private double balance;
 
+    private double TNA;
+
     //cantidad de cuotas
     private int nPayments;
 
