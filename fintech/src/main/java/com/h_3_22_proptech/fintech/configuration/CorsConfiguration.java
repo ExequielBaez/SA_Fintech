@@ -14,8 +14,7 @@ public class CorsConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry){
                 registry.addMapping("/**")
-                        .allowedOrigins("https://h3-22-proptech.vercel.app:3000")
-                        .allowedOrigins("*")
+                        .allowedOrigins("https://h3-22-proptech.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
